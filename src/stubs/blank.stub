@@ -1,0 +1,16 @@
+<?php
+
+use ITBrains\ReleaseScript\ScriptInterface;
+
+class DummyClass implements ScriptInterface
+{
+    /**
+     * Run the script.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        //
+    }
+}

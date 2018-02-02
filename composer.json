@@ -1,0 +1,37 @@
+{
+    "name": "it-brains/laravel-release-scripts",
+    "description": "Laravel Release Scripts, easy to set up one-off execute scripts that will be running during deploy script.",
+    "keywords": [
+        "laravel",
+        "deploy"
+    ],
+    "homepage": "https://github.com/spatie/laravel-backup",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nikolay Zhidenko",
+            "email": "dragg.ko@gmail.com",
+            "homepage": "http://it-brains.org",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.1",
+        "illuminate/support": "^5.5",
+        "illuminate/console": "^5.5",
+        "illuminate/database": "^5.5",
+        "illuminate/filesystem": "^5.5"
+    },
+    "autoload": {
+      "psr-4": {
+          "ITBrains\\ReleaseScript\\": "src/"
+      }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "ITBrains\\ReleaseScript\\ServiceProvider"
+            ]
+        }
+    }
+}
