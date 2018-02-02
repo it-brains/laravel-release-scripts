@@ -2,6 +2,14 @@
 
 This package allows creating one-off execute scripts. This should be useful when after some changes need run additional commands (for example, need add a new role to app when we implemented a new feature).
 
+## Install
+
+Require this package with composer using the following command:
+
+```
+composer require it-brains/laravel-release-scripts
+```
+
 ## How use
 
 Step 1. Create a new release script:
