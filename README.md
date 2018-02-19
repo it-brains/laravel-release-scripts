@@ -49,6 +49,12 @@ php artisan release-script:run --force --migrate
 
 Note: with '--migrate' option the 'migrate' command running before all release scripts.
 
+## Important Notes
+
+* If you plan to run a command that requires a confirmation (often doing it on production environment mode) then need not to forget setup an option to prevent it. For example, setup '--force' option for run seed command: 
+```Artisan::call('db:seed', ['--class' => SettingsTableSeeder::class, '--force' => true]);```
+
+
 ## Available commands
 ```
 php artisan make:release-script 
