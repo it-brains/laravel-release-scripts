@@ -32,11 +32,11 @@ class ScriptService
     }
 
 
-    public function run($paths = [])
+    public function run($paths = [], $class = null)
     {
-        $files = $this->getScriptsFiles($paths);
+        $files = $this->getScriptsFiles($paths, $class);
 
-        $ranScripts = $this->scriptsRepository->getRan();
+        $ranScripts = $class ? [] : $this->scriptsRepository->getRan();
 
         $scripts = $this->pendingScripts($files, $ranScripts);
 
@@ -160,10 +160,12 @@ class ScriptService
             })->values()->all();
     }
 
-    public function getScriptsFiles($paths)
+    public function getScriptsFiles($paths, $class = null)
     {
-        return Collection::make($paths)->flatMap(function ($path) {
-            return $this->files->glob($path . '/*_*.php');
+        return Collection::make($paths)->flatMap(function ($path) use ($class) {
+            $pattern = $class ? "/*{$this->prepareFileNameByClass($class)}.php" : '/*_*.php';
+
+            return $this->files->glob($path . $pattern);
         })->filter()->sortBy(function ($file) {
             return $this->getScriptName($file);
         })->values()->keyBy(function ($file) {
@@ -201,5 +203,22 @@ class ScriptService
     public function getNotes()
     {
         return $this->notes;
+    }
+
+    /**
+     * @param $className
+     * @return string
+     */
+    protected function prepareFileNameByClass($className)
+    {
+        preg_match_all('!([A-Z][A-Z0-9]*(?=$|[A-Z][a-z0-9])|[A-Za-z][a-z0-9]+)!', $className, $matches);
+
+        $ret = $matches[0];
+
+        foreach ($ret as &$match) {
+            $match = $match == strtoupper($match) ? strtolower($match) : lcfirst($match);
+        }
+
+        return implode('_', $ret);
     }
 }
