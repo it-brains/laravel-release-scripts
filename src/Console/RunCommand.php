@@ -18,7 +18,7 @@ class RunCommand extends BaseCommand
      */
     protected $signature = 'release-script:run 
                 {--force : Force the operation to run when in production.}
-                {--class= : Run the one time execute release scripts by class name. Without previous runs.}
+                {--class= : Run the release script by class name.}
                 {--migrate : Indicates if the migrate task should be run before.}';
 
     /**
