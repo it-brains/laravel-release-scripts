@@ -18,6 +18,7 @@ class RunCommand extends BaseCommand
      */
     protected $signature = 'release-script:run 
                 {--force : Force the operation to run when in production.}
+                {--class= : Run the release script by class name.}
                 {--migrate : Indicates if the migrate task should be run before.}';
 
     /**
@@ -69,7 +70,7 @@ class RunCommand extends BaseCommand
 
         $this->prepareDatabase();
 
-        $this->scriptService->run($this->getScriptsPaths());
+        $this->scriptService->run($this->getScriptsPaths(), $this->option('class'));
 
         // Once the 'script service' has run we will grab the note output and send it out to
         // the console screen, since the 'script service' itself functions without having
