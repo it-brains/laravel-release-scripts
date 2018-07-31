@@ -54,6 +54,24 @@ Note: with '--migrate' option the 'migrate' command running before all release s
 * If you plan to run a command that requires a confirmation (often doing it on production environment mode) then need not to forget setup an option to prevent it. For example, setup '--force' option for run seed command: 
 ```Artisan::call('db:seed', ['--class' => SettingsTableSeeder::class, '--force' => true]);```
 
+* If you plan to run a command with ```--class``` option, for example: ```php artisan release-script:run --class=AddManagerRole```, you need add "scripts" directory to composer classmap:
+```json
+...
+
+"autoload": {
+        "classmap": [
+            "database/seeds",
+            "database/scripts",
+            "database/factories"
+        ],
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+
+...
+``` 
+
 
 ## Available commands
 ```
